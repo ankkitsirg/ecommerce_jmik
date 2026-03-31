@@ -1,0 +1,12 @@
+----table list -----------
+create table users( 
+
+id serial PRIMARY KEY,
+name VARCHAR(100) ,
+email VARCHAR(150) UNIQUE ,
+password TEXT,
+role VARCHAR(20) DEFAULT 'user',
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+)
+-------------------------------
