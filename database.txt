@@ -10,3 +10,10 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 )
 -------------------------------
+create table categories(
+id serial primary key,
+name varchar(100),
+created_at timestamp default current_timestamp
+)
+
+-------------------------------------
