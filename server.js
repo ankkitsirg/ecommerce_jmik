@@ -11,13 +11,30 @@ objofserver.use(express.json())
 //creating endpoints
 
 //Get METHOD
-objofserver.get('/home',(objofreq,objofres)=>{ 
-    objofres.send("Welcome To Express");
+objofserver.get('/getusers',async (objofreq,objofres)=>{ 
+   
+     //step 1--->receive data from postman/frontend
+
+     //step 2--->write query for table
+     const result=await objofconnection.query("select * from users");// it is long time 
+
+     //step 3-->send response to postman/frontend
+     objofres.json({message:"Successfull",data:result.rows});
+
  })
 
 //post Method 
-objofserver.post('/saveusers',(objofreq,objofres)=>{ 
+objofserver.post('/saveusers',async (objofreq,objofres)=>{ 
     //collect the data from requset / frontend / postman
+     //step 1--->receive data from postman/frontend
+      const {name,email,password}=objofreq.body;
+
+     //step 2--->write query for table
+     //const result=await objofconnection.query("insert into users(name,email,password) values('"+name+"','"+email+"','"+password+"') returning *");//long time
+      const result=await objofconnection.query("insert into users(name,email,password) values($1,$2,$3) returning *",[name,email,password]);//long time
+
+     //step 3-->send response to postman/frontend
+     objofres.json({message:"Inserted Successfully",data:result.rows[0]});
     
  })
 
