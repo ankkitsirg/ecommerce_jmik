@@ -1,11 +1,14 @@
-const express=require('express');
-const cors =require('cors');
-const objofconnection=require('./config/db');//receiving connection object
-const objofserver=express();
+import express from 'express';
+import cors from 'cors';
+import objofconnection from './config/db.js'; // make sure extension is included
+import productRoutes from './routes/productRoutes.js';
+
+const objofserver = express();
 
 //permissions
 objofserver.use(cors());
 objofserver.use(express.json())
+objofserver.use("/api/products",productRoutes);
 
 
 //creating endpoints

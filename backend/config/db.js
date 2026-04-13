@@ -1,7 +1,7 @@
-const {Client}=require('pg');
+import  {Client} from 'pg';
 
 //info of database
-const db_info={user:'postgres',host:'localhost',database:'ecom_jmik',password:'admin123',port:5432 };
+const db_info={user:'postgres',host:'localhost',database:'onlinedb',password:'admin123',port:5432 };
 
 //create connection
 
@@ -14,4 +14,4 @@ objofconnection.connect()
                .catch((err)=>{console.error("Connection Error is :",err)});
 
 //sending connection object
-module.exports=objofconnection               
+export default objofconnection               
