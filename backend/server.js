@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import objofconnection from './config/db.js'; // make sure extension is included
 import productRoutes from './routes/productRoutes.js';
+import cartRoutes from './routes/cartRoutes.js';
 
 const objofserver = express();
 
@@ -9,6 +10,7 @@ const objofserver = express();
 objofserver.use(cors());
 objofserver.use(express.json())
 objofserver.use("/api/products",productRoutes);
+objofserver.use("/api/cart",cartRoutes);
 
 
 //creating endpoints

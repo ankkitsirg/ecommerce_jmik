@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
 import ProductGrid from "./ProductGrid";
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
@@ -73,6 +74,9 @@ const ProductPage = () => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
+    <Link to="/cart"> 
+       <button className="bg-green-500 text-white px-5 ml-5 rounded" >Go To Cart</button>
+    </Link>
       <ProductGrid products={filteredProducts} />
     </>
   );

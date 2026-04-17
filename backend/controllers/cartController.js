@@ -1,4 +1,4 @@
-import objofconnection from "../config/db";
+import objofconnection from "../config/db.js";
 
 //check and create cart for user
 
@@ -56,15 +56,19 @@ export const getCart=async (req,res)=>{
         //step 2--qusery
          const cart=await objofconnection.query(`select * from cart
                                                             where user_id=$1`,[userId]);
+
+         console.log(cart);                                                   
         //step 3--whether cart is empty
         if(cart.rows.length===0)  
                res.json([]);
+
+
             
         //step 4--when cart is not empty fetch data from cart_item table
         const items=await objofconnection.query(`select cart_items.id,cart_items.quantity,
                                                 products.name,products.price,products.image from cart_items
                                                 join products on cart_items.product_id=products.id
-                                                    where  cart_id=$1`,[cart.id]); 
+                                                    where  cart_id=$1`,[cart.rows[0].id]); 
        //step 5--send data to frontend
         res.json(items.rows);        
 
