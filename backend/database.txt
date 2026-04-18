@@ -1,19 +1,81 @@
-----table list -----------
-create table users( 
+...table list ....
+create table users(
 
-id serial PRIMARY KEY,
-name VARCHAR(100) ,
-email VARCHAR(150) UNIQUE ,
-password TEXT,
-role VARCHAR(20) DEFAULT 'user',
-created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-
+      id serial PRIMARY KEY, 
+      name VARCHAR(100), 
+      email VARCHAR(150) UNIQUE, 
+      password TEXT, 
+      role_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
--------------------------------
+..............................
+
 create table categories(
-id serial primary key,
-name varchar(100),
-created_at timestamp default current_timestamp
+
+      id serial PRIMARY KEY, 
+      name VARCHAR(100),
+      create_at TIMESTAMP default CURRENT_TIMESTAMP
 )
 
--------------------------------------
+----------------------------------
+CREATE TABLE cart (
+ id SERIAL PRIMARY KEY,
+ user_id INT REFERENCES users(id)
+);
+-----------------------------------------------------
+CREATE TABLE cart_items (
+ id SERIAL PRIMARY KEY,
+ cart_id INT REFERENCES cart(id),
+ product_id INT REFERENCES products(id),
+ quantity INT
+);
+-----------------------------------------------------------------
+CREATE TABLE orders (
+ id SERIAL PRIMARY KEY,
+ user_id INT REFERENCES users(id),
+
+--order info
+ total_amount NUMERIC(10,2),
+
+--address 
+Address_line TEXT,
+City varchar(100),
+State varchar(100),
+Country varchar(100),
+Zip_code varchar(20),
+
+--payment
+Payment_method varchar(50),
+
+
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+---------------------------------------------------------
+CREATE TABLE order_items (
+ id SERIAL PRIMARY KEY,
+ order_id INT REFERENCES orders(id),
+ product_id INT REFERENCES products(id),
+ quantity INT,
+ price NUMERIC(10,2)
+);
+---------------------------------------------------------------
+CREATE TABLE reviews (
+ id SERIAL PRIMARY KEY,
+ user_id INT REFERENCES users(id),
+ product_id INT REFERENCES products(id),
+ rating INT,
+ comment TEXT,
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-------------------------------------------------------
+
+CREATE TABLE products (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(200),
+  description TEXT,
+  price NUMERIC(10,2),
+  category_id INT REFERENCES categories(id),
+  image TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

@@ -1,5 +1,6 @@
 
 import { useState,useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function CartPage()
 {
@@ -25,7 +26,9 @@ function CartPage()
                         <p>Quantity: {item.quantity}</p>
                     </div>
                 ))}
-
+         <Link to="/orders">    
+             <button className="bg-green-500 text-white rounded">Checkout</button>
+            </Link>
 
     </div>)
 }

@@ -12,6 +12,7 @@ const checkOrCreateCart = async (user_id)=>
     if (cart.rows.length === 0) {
         const newcart = await objofconnection.query(`insert into cart(user_id)
                                                         values($1) returning *`, [user_id]);
+        return newcart.rows[0];                                                                             
     }
 
     return cart.rows[0];// cartid(id) and userid
